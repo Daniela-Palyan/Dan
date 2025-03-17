@@ -3,11 +3,12 @@ extern printf
 extern scanf
 section .rodata
 	eror db "tak ne paydyot", 10, 0
-	txt1 db "enter num1: ", 10, 0
-	txt2 db "enter num2: ", 10, 0
-	operation db "choose operation (add-1, sub-2, mul-3, div-4): ", 10, 0
-	mutq db "%d", 10, 0
-	res db "Result is: %d", 10, 0
+	txt1 db "enter num1: ", 0
+	txt2 db "enter num2: ", 0
+	operation db "choose operation (add-1, sub-2, mul-3, div-4): ", 0
+	mutq db "%d", 0
+	res db "Result is: %d", 0
+	verj db " ", 10, 0
 section .data
 	num1 dd 0
 	num2 dd 0
@@ -95,6 +96,9 @@ print_result:
 	jmp exit
 
 exit:
+xor rax, rax
+mov rdi, verj
+call printf
 mov rsp	, rbp
 pop rbp
 xor rax, rax
