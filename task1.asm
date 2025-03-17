@@ -1,6 +1,8 @@
+
 extern printf
 extern scanf
 section .rodata
+	eror db "tak ne paydyot", 10, 0
 	txt1 db "enter num1: ", 10, 0
 	txt2 db "enter num2: ", 10, 0
 	operation db "choose operation (add-1, sub-2, mul-3, div-4): ", 10, 0
@@ -44,7 +46,7 @@ call scanf
   xor rax, rax
   call scanf
 
-mov eax, [oper]
+mov eax, dword[oper]
 cmp eax, 1
 je gumar
 cmp eax, 2
@@ -54,38 +56,47 @@ je artadryal
 cmp eax, 4
 je haraberutyun
 
+mov rdi, eror
+xor rax, rax
+call printf
+jmp exit
+
 gumar:
-	mov ebx, [num1]
-	add ebx, [num2]
-	mov [result], ebx
+	mov ebx, dword[num1]
+	add ebx, dword[num2]
+	mov dword[result], ebx
 	jmp print_result
 
 tarberutyun:
-	mov ebx, [num1]
-        sub ebx, [num2]
-        mov [result], ebx
+	mov ebx, dword[num1]
+        sub ebx, dword[num2]
+        mov dword[result], ebx
         jmp print_result 
 
 
 artadryal:
-	mov eax, [num1]
-        imul eax, [num2]
-        mov [result], eax
+	mov eax, dword[num1]
+        imul eax, dword[num2]
+        mov dword[result], eax
         jmp print_result
 
 haraberutyun:
-	mov eax, [num1]
+	mov eax, dword[num1]
         idiv dword[num2]
-        mov [result], eax
+        mov dword[result], eax
         jmp print_result
 
 print_result:
 	xor rsi, rsi
-	mov esi, [result]
+	mov esi, dword[result]
 	mov rdi, res
 	xor rax, rax
 	call printf
+	jmp exit
 
-
+exit:
+mov rsp	, rbp
+pop rbp
+xor rax, rax
 ret
-	 
+ 
