@@ -1,42 +1,47 @@
 extern printf
 extern scanf
 section .data
-	mutq_printf db "Enter N: ", 0
-	mutq_scanf db "%d", 0
-	sum db "Sum = %d "
+	fmt db "Enter N: ", 0
+	fmt2 db "%d", 0
+	sum_fmt db "Sum = %d ", 10, 0
 section .bss
+	num resq 1
 
 section .text
 	global main:
 main:
 	push rbp
-	mov rbp, rsi
+	mov rbp, rsp
 
-	mov rdi, mutq_printf
+	mov rdi, fmt
 	xor rax, rax
 	call printf
-
-	mov rsi, rcx
-	mov rdi, mutq_scanf
+	mov rsi, num
+	mov rdi, fmt2
+	xor rax, rax
 	call scanf
-	mov rbx, rcx
-L:
-	cmp rbx, 0
-	je END
-	
-	add rcx, rbx
-	dec rbx
-	jmp L
 
-END:
-	mov rsi, rcx 
-	mov rdi, sum
+	mov rbx, [num]
+	xor rdx, rdx
+
+gumar: 
+	cmp rbx, 0
+	je end
+
+	add rdx, rbx
+	dec rbx
+
+	jmp gumar
+
+
+end:
+	mov rsi, rdx
+	mov rdi, sum_fmt
 	xor rax, rax
 	call printf
 
 	mov rsp, rbp
 	pop rbp
-
 	xor rax, rax
 	ret
 
