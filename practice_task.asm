@@ -1,5 +1,5 @@
 extern printf
-xtern scanf
+extern scanf
 section .data
 	fmt_a db "Enter a: ", 0
 	fmt_b db "Enter b: ", 0
@@ -11,41 +11,39 @@ section .text
 main:
 	push rbp
 	mov rbp, rsp
-	
+	sub rsp, 16
 
-	sub rsp, 4
 	mov rdi, fmt_a
-	xor rax,rax
+	xor rax, rax
 	call printf
 
 	mov rsi, rsp
 	mov rdi, fmt_in
+	xor rax, rax
 	call scanf
 
-	sub rsp, 4
 	mov rdi, fmt_b
-        xor rax,rax
-        call printf
+    xor rax, rax
+    call printf
 
-        mov rsi, rsp
-        mov rdi, fmt_in
-        call scanf
+    mov rsi, rsp
+	add rsi, 4
+    mov rdi, fmt_in
+	xor rax, rax
+    call scanf
 
 	xor rcx, rcx
 	xor rax, rax
-	mov ecx, dword[rsp]
-	add rsp, 4
 	mov eax, dword[rsp]
-	add rsp, 4
+	mov ebx, dword[rsp + 4]
 
-	push rax
 	mov rdx, 1
 
 L:
-	cmp rcx, 0
+	cmp rbx, 0
 	je result	
 	imul rdx, rax
-	dec rcx
+	dec rbx
 	jmp L 
 
 result:
@@ -55,7 +53,7 @@ result:
 	xor rax, rax
 	call printf
 
-
+end:
 	mov rsp, rbp
 	pop rbp
 	xor rax, rax
