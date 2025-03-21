@@ -5,7 +5,7 @@ int main()
 
 {
 
-    int num = 0, x = 0, t = 1;
+    int num = 0, x = 0;
 
     printf("Enter number: ");
 
