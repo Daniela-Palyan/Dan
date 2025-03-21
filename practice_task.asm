@@ -1,5 +1,5 @@
 extern printf
-extern scanf
+xtern scanf
 section .data
 	fmt_a db "Enter a: ", 0
 	fmt_b db "Enter b: ", 0
@@ -13,7 +13,7 @@ main:
 	mov rbp, rsp
 	
 
-	sub rsi, 4
+	sub rsp, 4
 	mov rdi, fmt_a
 	xor rax,rax
 	call printf
@@ -22,7 +22,7 @@ main:
 	mov rdi, fmt_in
 	call scanf
 
-	sub rsi, 4
+	sub rsp, 4
 	mov rdi, fmt_b
         xor rax,rax
         call printf
