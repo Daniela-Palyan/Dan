@@ -2,37 +2,31 @@
 
 int main()
 {
-	int num = 0, a = 1, x = 0, tv_qanak = 0, sum = 0;
+	int num = 0, a = 1, x = 0, sum = 0;
 	printf("Enter number: ");
-	scanf("%d", &num);
-
-	x = num;
-    while(x > 0)
+	scanf("%d", &num); 
+	int y = num;
+    while (y)
     {
-        x = x/10;
-        tv_qanak++;
+        x = num;
+        while (x)
+        {
+            a = a  * (y % 10);
+            x /= 10;
+        }
+        
+        sum  = sum + a;
+        y /= 10;
+        a = 1;
     }
-		
-	for (int i = 0; i < tv_qanak; i++)
-	{
-		x = num % 10;
-		for(int j = 0; j < tv_qanak; j++)
-		{
-			a *=x;
-		}
-		sum += a;
-		num /= 10;
-		
-	}
 	if (sum == num)
 	{
-		printf("yes, this is Armstrong number!\n");
+	    printf("This is armstrong number");
 	}
 	else
 	{
-		printf("Nope \n");
+	    printf("nope");
 	}
-	
 	
 	return 0;
 }
