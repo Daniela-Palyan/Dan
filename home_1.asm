@@ -24,7 +24,8 @@ main:
     mov rax, 1
     mov r9, 0
     xor rcx, rcx
-    mov rcx, [num]
+    mov ecx, dword[num]
+    sub ecx, 2
 
 L:
     mov r9, rax
