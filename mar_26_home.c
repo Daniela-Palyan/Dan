@@ -3,8 +3,7 @@
 int main()
 {
 	int n = 1;
-	int *p = &n;
-	char *p1 = (char *)p;
+	char *p1 = &n;
 	if (*p1 == 1)
 	{
 		printf("little\n");

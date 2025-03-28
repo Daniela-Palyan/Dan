@@ -18,7 +18,7 @@ int main()
 		}
 		else if(i == n)
 		{
-			for(int j = 2 * n -1; j >0; j--)
+			for(int j = 2 * n -1; j > 0; j--)
 				printf("*");
 			printf("\n");
 		}
